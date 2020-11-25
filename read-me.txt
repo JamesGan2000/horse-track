@@ -1,5 +1,7 @@
 This project, built using Spring-Boot and IntelliJ, simulates a simple Horse Track Game System.
 
+-- see document [HorseTrackProblemInstructions.pdf] for requirement / game functionality
+
 This is implemented as a RESTful application as an online game to
 - make it easier to run/test
 - view output
