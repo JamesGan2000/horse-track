@@ -186,3 +186,9 @@ Horses:
 5, Real Princess, 3, lost
 6, Pa Kettle, 5, lost
 7, Gin Stinger, 6, lost
+
+12) http://localhost:8080/play/Q/1/
+
+  // quit game
+
+QUIT
