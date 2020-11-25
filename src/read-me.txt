@@ -1,0 +1,186 @@
+This project, built using Spring-Boot and IntelliJ, simulates a simple Horse Track Game System.
+
+This is implemented as a RESTful application as an online game to
+- make it easier to run/test
+- view output
+- show coding / separating Controller / Service / Repository layers
+
+It has following endpoints:
+
+/start
+/play/{param1}/{param2}
+
+An example usage of above [after starting/running the application in IntelliJ, for example] will display:
+
+1) http://localhost:8080/start
+
+Inventory:
+$1, 10
+$5, 10
+$10, 10
+$20, 10
+$100, 10
+Horses:
+1, That DarnGray Cat, 5, won
+2, Fort Utopia, 10, lost
+3, Count Sheep, 9, lost
+4, Ms Traitour, 4, lost
+5, Real Princess, 3, lost
+6, Pa Kettle, 5, lost
+7, Gin Stinger, 6, lost
+
+2) http://localhost:8080/play/20/556/
+
+ Invalid Horse Number:20
+
+  // There is no horse #20, so can not make bet
+
+3) http://localhost:8080/play/3/556/
+
+ No Payout:Count Sheep
+
+ // the Horse #3 is not a winning horse
+
+4) http://localhost:8080/play/1/556/
+
+Insufficient Funds: $2780
+
+ // horse #1 is a winning horse, but the total cash inventory is only $1360
+
+5) http://localhost:8080/play/1/55/
+
+ // horse #1 is winning horse, 55 * 5 = $275 as payout amount
+
+Payout:That DarnGray Cat, $275
+Dispensing:
+$100, 2
+$20, 3
+$10, 1
+$5, 1
+Inventory:
+$1, 10
+$5, 9
+$10, 9
+$20, 7
+$100, 8
+Horses:
+1, That DarnGray Cat, 5, won
+2, Fort Utopia, 10, lost
+3, Count Sheep, 9, lost
+4, Ms Traitour, 4, lost
+5, Real Princess, 3, lost
+6, Pa Kettle, 5, lost
+7, Gin Stinger, 6, lost
+
+6) http://localhost:8080/play/1/120/
+
+  // continue to make winning bet on horse #1
+
+Payout:That DarnGray Cat, $600
+Dispensing:
+$100, 6
+Inventory:
+$1, 10
+$5, 9
+$10, 9
+$20, 7
+$100, 2
+Horses:
+1, That DarnGray Cat, 5, won
+2, Fort Utopia, 10, lost
+3, Count Sheep, 9, lost
+4, Ms Traitour, 4, lost
+5, Real Princess, 3, lost
+6, Pa Kettle, 5, lost
+7, Gin Stinger, 6, lost
+
+7) http://localhost:8080/play/W/2/
+
+ // now, make the horse #2 as winning horse
+
+Inventory:
+$1, 10
+$5, 9
+$10, 9
+$20, 7
+$100, 2
+Horses:
+1, That DarnGray Cat, 5, lost
+2, Fort Utopia, 10, won
+3, Count Sheep, 9, lost
+4, Ms Traitour, 4, lost
+5, Real Princess, 3, lost
+6, Pa Kettle, 5, lost
+7, Gin Stinger, 6, lost
+
+8) http://localhost:8080/play/2/30/
+
+  // now make a winning bet on horse #2
+
+Payout:Fort Utopia, $300
+Dispensing:
+$100, 2
+$20, 5
+Inventory:
+$1, 10
+$5, 9
+$10, 9
+$20, 2
+$100, 0
+Horses:
+1, That DarnGray Cat, 5, lost
+2, Fort Utopia, 10, won
+3, Count Sheep, 9, lost
+4, Ms Traitour, 4, lost
+5, Real Princess, 3, lost
+6, Pa Kettle, 5, lost
+7, Gin Stinger, 6, lost
+
+9) http://localhost:8080/play/2/30.456/
+
+ // trying to make a bet with invalid amount/number [30.456 is not an integer value]
+
+Invalid Bet: 30.456
+
+10) http://localhost:8080/play/R/1/
+
+ // reset-cash-inventory [system still keep track the previously set-winning-horse]
+
+Inventory:
+$1, 10
+$5, 10
+$10, 10
+$20, 10
+$100, 10
+Horses:
+1, That DarnGray Cat, 5, lost
+2, Fort Utopia, 10, won
+3, Count Sheep, 9, lost
+4, Ms Traitour, 4, lost
+5, Real Princess, 3, lost
+6, Pa Kettle, 5, lost
+7, Gin Stinger, 6, lost
+
+11) http://localhost:8080/play/2/123/
+
+  // now, make a HUGE winning bet
+
+Payout:Fort Utopia, $1230
+Dispensing:
+$100, 10
+$20, 10
+$10, 3
+Inventory:
+$1, 10
+$5, 10
+$10, 7
+$20, 0
+$100, 0
+Horses:
+1, That DarnGray Cat, 5, lost
+2, Fort Utopia, 10, won
+3, Count Sheep, 9, lost
+4, Ms Traitour, 4, lost
+5, Real Princess, 3, lost
+6, Pa Kettle, 5, lost
+7, Gin Stinger, 6, lost
