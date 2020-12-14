@@ -12,8 +12,8 @@ public class HorseTrackController {
     @GetMapping("/start")
     @ResponseBody
     public String start(){
-        return HorseTrackHelper.displayInitialInventory() + "<br/>" +
-                HorseTrackHelper.displayInitialHorseInfo();
+        return HorseTrackViewHelper.displayInitialInventory() + "<br/>" +
+                HorseTrackViewHelper.displayInitialHorseInfo();
     }
 
     @GetMapping("/play/{param1}/{param2}")
