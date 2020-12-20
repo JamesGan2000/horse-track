@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HorseTrackHelper {
-    static List<HorseOdd> horseInfos;
-    static List<InventoryItem> balances;
+    static List<HorseOdd> horseInfos = HorseTrackInitalizer.initialHorseOdds();
+    static List<InventoryItem> balances = HorseTrackInitalizer.initialInventory();;
 
     public static List<HorseOdd> getHorseInfos() {
         return horseInfos;
